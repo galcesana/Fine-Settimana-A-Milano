@@ -1,1393 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Milan Trip 25–30 December 2025</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    /* --------------------
-       Base Styles & Layout
-    --------------------- */
-    :root {
-      --bg: #070b10;
-      --bg-elevated: #111827;
-      --bg-elevated-soft: #111827;
-      --accent: #ec3750; /* Milan / AC Milan red */
-      --accent-soft: rgba(236, 55, 80, 0.13);
-      --accent-strong: #f97373;
-      --accent-alt: #22c55e;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --border-subtle: #1f2937;
-      --card-radius: 18px;
-      --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.6);
-      --nav-height: 64px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #111827 0, #020617 55%);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-    }
-
-    body {
-      line-height: 1.5;
-    }
-
-    main {
-      min-height: 100vh;
-      padding: 1.25rem 1rem calc(var(--nav-height) + 1.5rem);
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    section {
-      margin-bottom: 1.75rem;
-    }
-
-    /* --------------------
-       Typography
-    --------------------- */
-    h1 {
-      font-size: 1.7rem;
-      letter-spacing: 0.02em;
-    }
-
-    h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    h3 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-    }
-
-    p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.8rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(248, 250, 252, 0.05);
-      color: var(--text-muted);
-      backdrop-filter: blur(16px);
-    }
-
-    .section-tag {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent-strong);
-      margin-bottom: 0.25rem;
-    }
-
-    /* --------------------
-       Cards & Containers
-    --------------------- */
-    .hero {
-      margin-bottom: 2rem;
-    }
-
-    .hero-card {
-      position: relative;
-      overflow: hidden;
-      padding: 1.25rem 1.1rem;
-      border-radius: 22px;
-      background: radial-gradient(circle at top left, #1f2937, #020617 60%);
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      box-shadow: var(--shadow-soft);
-      color: var(--text-main);
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0 0, rgba(236, 55, 80, 0.22), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(56, 189, 248, 0.16), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .hero-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-
-    .hero-main {
-      flex: 1;
-    }
-
-    .hero-title {
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-sub {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .hero-badge {
-      margin-top: 0.5rem;
-    }
-
-    .hero-meta {
-      margin-top: 0.9rem;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.6rem;
-      font-size: 0.78rem;
-    }
-
-    .meta-item {
-      padding: 0.45rem 0.55rem;
-      border-radius: 0.9rem;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .meta-label {
-      color: var(--text-muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .meta-value {
-      font-weight: 500;
-      font-size: 0.8rem;
-    }
-
-    .card {
-      background: radial-gradient(circle at top, #0b1120 0, #020617 70%);
-      border-radius: var(--card-radius);
-      padding: 1rem 0.95rem;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.65);
-      margin-bottom: 0.75rem;
-    }
-
-    .card.highlight {
-      border-color: rgba(236, 55, 80, 0.7);
-      box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.55), var(--shadow-soft);
-    }
-
-    .card-header-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .card-title-main {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .card-chip {
-      font-size: 0.7rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: var(--text-muted);
-    }
-
-    .card-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.45rem;
-    }
-
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.75rem;
-      font-size: 0.83rem;
-      margin-bottom: 0.18rem;
-      align-items: center;
-    }
-
-    .card-row-label {
-      color: var(--text-muted);
-    }
-
-    .card-row-value {
-      font-weight: 500;
-    }
-
-    .card-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.35rem;
-    }
-
-    /* --------------------
-       Map Section
-    --------------------- */
-    .map-wrapper {
-      position: relative;
-      width: 100%;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      background: #020617;
-    }
-
-    .map-inner {
-      position: relative;
-      padding-top: 56.25%; /* 16:9 ratio */
-      width: 100%;
-    }
-
-    .map-inner iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .section-description {
-      font-size: 0.88rem;
-      margin-top: 0.5rem;
-    }
-
-    /* --------------------
-       Schedule Section
-    --------------------- */
-    .day-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.25rem;
-      gap: 0.5rem;
-    }
-
-    .day-date {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .day-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .day-items {
-      margin-top: 0.4rem;
-    }
-
-    .schedule-item {
-      padding: 0.45rem 0.4rem;
-      border-radius: 0.8rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      display: grid;
-      grid-template-columns: auto 1fr;
-      column-gap: 0.55rem;
-      row-gap: 0.12rem;
-      font-size: 0.86rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .schedule-time {
-      font-weight: 600;
-      font-size: 0.82rem;
-      color: var(--accent-strong);
-      padding-top: 0.1rem;
-    }
-
-    .schedule-main {
-      font-size: 0.86rem;
-    }
-
-    .schedule-notes {
-      grid-column: 2;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .match-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.08rem 0.5rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      background: rgba(236, 55, 80, 0.1);
-      border: 1px solid rgba(236, 55, 80, 0.6);
-      color: var(--accent-strong);
-      margin-top: 0.25rem;
-    }
-
-    /* --------------------
-       Flights & Tickets
-    --------------------- */
-    .badge-pnr {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 0.78rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 250, 252, 0.2);
-      background: rgba(15, 23, 42, 0.9);
-      margin-bottom: 0.45rem;
-    }
-
-    .badge-pnr span.code {
-      font-weight: 600;
-      letter-spacing: 0.08em;
-    }
-
-    .textarea-small {
-      width: 100%;
-      min-height: 72px;
-      margin-top: 0.55rem;
-      border-radius: 0.9rem;
-      border: 1px solid var(--border-subtle);
-      background: rgba(15, 23, 42, 0.92);
-      color: var(--text-main);
-      padding: 0.6rem 0.7rem;
-      font-size: 0.85rem;
-      resize: vertical;
-    }
-
-    .textarea-small::placeholder {
-      color: var(--text-muted);
-    }
-
-    .tickets-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .ticket-type {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent-alt);
-      margin-bottom: 0.2rem;
-    }
-
-    /* --------------------
-       Quick Info
-    --------------------- */
-    .info-list {
-      list-style: none;
-      font-size: 0.88rem;
-    }
-
-    .info-list li {
-      padding: 0.3rem 0;
-      border-bottom: 1px dashed rgba(148, 163, 184, 0.22);
-    }
-
-    .info-label {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.1rem;
-      display: block;
-    }
-
-    .phrases {
-      margin-top: 0.7rem;
-      padding-top: 0.6rem;
-      border-top: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    .phrase-item {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      padding: 0.25rem 0;
-    }
-
-    .phrase-it {
-      font-weight: 500;
-    }
-
-    .phrase-en {
-      color: var(--text-muted);
-    }
-
-    /* --------------------
-       Transport Buttons
-    --------------------- */
-    .link-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.55rem;
-    }
-
-    .link-button {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      padding: 0.75rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.92);
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .link-button span.label {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .link-button span.hint {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* --------------------
-       Checklist
-    --------------------- */
-    .checklist-group {
-      margin-bottom: 0.8rem;
-    }
-
-    .checklist-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 0.3rem;
-    }
-
-    .checklist-items {
-      list-style: none;
-      font-size: 0.9rem;
-    }
-
-    .checklist-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.28rem 0.25rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .checklist-item input[type="checkbox"] {
-      width: 1rem;
-      height: 1rem;
-      accent-color: var(--accent);
-    }
-
-    .checklist-item span.text {
-      transition: color 0.15s ease, text-decoration-color 0.15s ease,
-        opacity 0.15s ease;
-    }
-
-    .checklist-item.completed span.text {
-      text-decoration: line-through;
-      text-decoration-thickness: 0.12em;
-      opacity: 0.6;
-      color: var(--text-muted);
-    }
-
-    /* --------------------
-       Notes
-    --------------------- */
-    .notes-area {
-      width: 100%;
-      min-height: 140px;
-      border-radius: 1rem;
-      border: 1px solid var(--border-subtle);
-      background: rgba(15, 23, 42, 0.97);
-      color: var(--text-main);
-      padding: 0.75rem 0.85rem;
-      font-size: 0.9rem;
-      resize: vertical;
-    }
-
-    .notes-area::placeholder {
-      color: var(--text-muted);
-    }
-
-    /* --------------------
-       Bottom Navigation
-    --------------------- */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: var(--nav-height);
-      background: rgba(15, 23, 42, 0.96);
-      backdrop-filter: blur(18px);
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
-      display: flex;
-      justify-content: space-between;
-      padding: 0.2rem 0.4rem;
-      z-index: 100;
-    }
-
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.05rem;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      border-radius: 999px;
-      padding: 0.15rem 0;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: background 0.16s ease, color 0.16s ease, transform 0.1s ease;
-    }
-
-    .nav-item span.icon {
-      font-size: 1rem;
-      line-height: 1;
-    }
-
-    .nav-item span.label {
-      font-size: 0.65rem;
-    }
-
-    .nav-item.active {
-      color: var(--accent-strong);
-      background: rgba(236, 55, 80, 0.12);
-      transform: translateY(-1px);
-    }
-
-    /* --------------------
-       Misc Helpers
-    --------------------- */
-    .section-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-sub-hint {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* --------------------
-       Desktop tweaks
-    --------------------- */
-    @media (min-width: 720px) {
-      main {
-        padding: 1.5rem 1.5rem calc(var(--nav-height) + 2rem);
-      }
-
-      .hero-row {
-        align-items: stretch;
-      }
-
-      .hero-meta {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .link-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .tickets-grid {
-        flex-direction: row;
-      }
-
-      .card {
-        padding: 1.1rem 1.05rem;
-      }
-
-      .hero-card {
-        padding: 1.4rem 1.3rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <!-- =========================
-         Header / Hero Section
-    ========================== -->
-    <header class="hero" id="top">
-      <div class="hero-card">
-        <div class="hero-row">
-          <div class="hero-main">
-            <div class="pill">
-              <span>🇮🇹</span>
-              <span>Milan Trip Planner</span>
-            </div>
-            <div class="hero-title">
-              <h1>Milan Trip 25–30 December 2025</h1>
-            </div>
-            <p class="hero-sub">Tel Aviv ➜ Milan ➜ Tel Aviv</p>
-            <div class="hero-badge">
-              <span class="pill">👨‍👩‍👧 3 siblings · Winter city break in Milano</span>
-            </div>
-
-            <div class="hero-meta">
-              <div class="meta-item">
-                <span class="meta-label">From</span>
-                <span class="meta-value">Tel Aviv (TLV)</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">To</span>
-                <span class="meta-value">Milan Malpensa (MXP)</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">PNR</span>
-                <span class="meta-value">ZM16VM · Wizz Air</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- =========================
-         Map Section
-    ========================== -->
-    <section id="map-section">
-      <div class="section-tag">Map</div>
-      <div class="section-header-row">
-        <h2>🗺️ Trip Map – Important Places</h2>
-      </div>
-      <div class="map-wrapper">
-        <div class="map-inner">
-          <!-- Google MyMaps Embed (responsive) -->
-          <iframe
-            src="https://www.google.com/maps/d/embed?mid=1TklI730QBc74WHVjuBcQKjor6fi-beY&ehbc=2E312F"
-            width="640"
-            height="480"
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-      <p class="section-description">
-        Tap the markers to see restaurants, bars, coffee spots, shopping, and attractions we marked.
-      </p>
-    </section>
-
-    <!-- =========================
-         Schedule Section
-    ========================== -->
-    <section id="schedule-section">
-      <div class="section-tag">Schedule</div>
-      <div class="section-header-row">
-        <h2>📆 Daily Schedule</h2>
-        <span class="section-sub-hint">Edit times & texts directly in the HTML</span>
-      </div>
-
-      <!-- Day 1: Thursday 25/12/2025 – Arrival -->
-      <div class="card">
-        <div class="day-card-header">
-          <div>
-            <div class="day-date">Thursday 25/12/2025</div>
-            <div class="day-label">Arrival Day</div>
-          </div>
-          <div class="card-chip">Day 1</div>
-        </div>
-        <div class="day-items">
-          <div class="schedule-item">
-            <div class="schedule-time">TBD</div>
-            <div class="schedule-main">Arrive in Milan (MXP / LIN / BGY – to edit)</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">TBD</div>
-            <div class="schedule-main">Check-in to hotel (editable)</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Evening</div>
-            <div class="schedule-main">Evening walk &amp; aperitivo (editable)</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 2: Friday 26/12/2025 -->
-      <div class="card">
-        <div class="day-card-header">
-          <div>
-            <div class="day-date">Friday 26/12/2025</div>
-            <div class="day-label">Explore Milano</div>
-          </div>
-          <div class="card-chip">Day 2</div>
-        </div>
-        <div class="day-items">
-          <div class="schedule-item">
-            <div class="schedule-time">Morning</div>
-            <div class="schedule-main">[Add plan – e.g. Duomo &amp; Galleria Vittorio Emanuele II]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Afternoon</div>
-            <div class="schedule-main">[Add plan – shopping / coffee / museum]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Evening</div>
-            <div class="schedule-main">[Add plan – dinner &amp; drinks]</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 3: Saturday 27/12/2025 -->
-      <div class="card">
-        <div class="day-card-header">
-          <div>
-            <div class="day-date">Saturday 27/12/2025</div>
-            <div class="day-label">City Day / Day Trip</div>
-          </div>
-          <div class="card-chip">Day 3</div>
-        </div>
-        <div class="day-items">
-          <div class="schedule-item">
-            <div class="schedule-time">Morning</div>
-            <div class="schedule-main">[Add plan – Navigli / Brera / day trip]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Afternoon</div>
-            <div class="schedule-main">[Add plan – lunch &amp; walk]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Evening</div>
-            <div class="schedule-main">[Add plan – aperitivo / bar]</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 4: Sunday 28/12/2025 – Match Day -->
-      <div class="card highlight">
-        <div class="day-card-header">
-          <div>
-            <div class="day-date">Sunday 28/12/2025</div>
-            <div class="day-label">Match Day – San Siro</div>
-          </div>
-          <div class="card-chip">Day 4</div>
-        </div>
-        <div class="day-items">
-          <div class="schedule-item">
-            <div class="schedule-time">12:00</div>
-            <div class="schedule-main">
-              AC Milan vs Hellas Verona FC – San Siro Stadium
-              <div class="match-tag">
-                <span>⚽</span>
-                <span>Match ticket needed</span>
-              </div>
-            </div>
-            <div class="schedule-notes">
-              Leave hotel around [HH:MM] (editable), Metro/tram directions (editable).
-            </div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Morning</div>
-            <div class="schedule-main">Light breakfast near hotel (editable)</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">After</div>
-            <div class="schedule-main">Post-match drinks / food (editable)</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Evening</div>
-            <div class="schedule-main">[Add plan – chill or night out]</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 5: Monday 29/12/2025 -->
-      <div class="card">
-        <div class="day-card-header">
-          <div>
-            <div class="day-date">Monday 29/12/2025</div>
-            <div class="day-label">Last Full Day</div>
-          </div>
-          <div class="card-chip">Day 5</div>
-        </div>
-        <div class="day-items">
-          <div class="schedule-item">
-            <div class="schedule-time">Morning</div>
-            <div class="schedule-main">[Add plan – favorite spots / last shopping]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Afternoon</div>
-            <div class="schedule-main">[Add plan – museum / coffee / walk]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Evening</div>
-            <div class="schedule-main">[Add plan – final dinner in Milano]</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 6: Tuesday 30/12/2025 – Departure -->
-      <div class="card">
-        <div class="day-card-header">
-          <div>
-            <div class="day-date">Tuesday 30/12/2025</div>
-            <div class="day-label">Departure Day</div>
-          </div>
-          <div class="card-chip">Day 6</div>
-        </div>
-        <div class="day-items">
-          <div class="schedule-item">
-            <div class="schedule-time">Morning</div>
-            <div class="schedule-main">Pack &amp; check-out</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">TBD</div>
-            <div class="schedule-main">Travel to airport (MXP) – [transport details editable]</div>
-          </div>
-          <div class="schedule-item">
-            <div class="schedule-time">Flight</div>
-            <div class="schedule-main">Return to Tel Aviv (TLV) – see flight section</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================
-         Flights Section
-    ========================== -->
-    <section id="flights-section">
-      <div class="section-tag">Flights</div>
-      <div class="section-header-row">
-        <h2>✈️ Flights – Wizz Air TLV ⇄ MXP</h2>
-      </div>
-
-      <div class="badge-pnr">
-        <span>Booking reference (PNR):</span>
-        <span class="code">ZM16VM</span>
-      </div>
-      <p class="section-description">
-        Airline: Wizz Air Malta Limited · Route: Tel Aviv (TLV) ⇄ Milan Malpensa (MXP) · Total: 3286 ILS.
-      </p>
-
-      <!-- Outbound Flight Card -->
-      <div class="card">
-        <div class="card-header-line">
-          <div class="card-title-main">Outbound – Tel Aviv ➜ Milan Malpensa (MXP)</div>
-          <span class="card-chip">25/12/2025</span>
-        </div>
-        <div class="card-subtitle">Wizz Air · TLV ➜ MXP · PNR: ZM16VM</div>
-
-        <div class="card-row">
-          <span class="card-row-label">Flight number</span>
-          <span class="card-row-value">[flight number – to edit manually]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Departure</span>
-          <span class="card-row-value">Tel Aviv (TLV) – [time – to edit]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Arrival</span>
-          <span class="card-row-value">Milan (MXP) – [time – to edit]</span>
-        </div>
-      </div>
-
-      <!-- Return Flight Card -->
-      <div class="card">
-        <div class="card-header-line">
-          <div class="card-title-main">Return – Milan Malpensa (MXP) ➜ Tel Aviv</div>
-          <span class="card-chip">30/12/2025</span>
-        </div>
-        <div class="card-subtitle">Wizz Air · MXP ➜ TLV · PNR: ZM16VM</div>
-
-        <div class="card-row">
-          <span class="card-row-label">Flight number</span>
-          <span class="card-row-value">[flight number – to edit manually]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Departure</span>
-          <span class="card-row-value">Milan (MXP) – [time – to edit]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Arrival</span>
-          <span class="card-row-value">Tel Aviv (TLV) – [time – to edit]</span>
-        </div>
-      </div>
-
-      <textarea class="textarea-small" placeholder="Notes: Total paid (invoice DWAM-40909873): 3286 ILS (Wizz Air). E-tickets and boarding passes are in the Wizz app / email (editable)."></textarea>
-    </section>
-
-    <!-- =========================
-         Tickets & Reservations
-    ========================== -->
-    <section id="tickets-section">
-      <div class="section-tag">Tickets &amp; Reservations</div>
-      <div class="section-header-row">
-        <h2>🎟️ Tickets &amp; Reservations</h2>
-      </div>
-
-      <div class="tickets-grid">
-        <!-- Wizz Air Ticket -->
-        <div class="card">
-          <div class="ticket-type">Flight Ticket</div>
-          <div class="card-header-line">
-            <div class="card-title-main">Wizz Air Flight – TLV ⇄ MXP</div>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Route</span>
-            <span class="card-row-value">TLV–MXP / MXP–TLV</span>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Airline</span>
-            <span class="card-row-value">Wizz Air Malta Limited</span>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">PNR</span>
-            <span class="card-row-value">ZM16VM</span>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Invoice</span>
-            <span class="card-row-value">DWAM-40909873</span>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Total</span>
-            <span class="card-row-value">3286 ILS</span>
-          </div>
-          <div class="card-note">
-            Note: Show boarding pass from Wizz app / email; e-invoice saved locally (editable).
-          </div>
-        </div>
-
-        <!-- AC Milan Match Ticket -->
-        <div class="card">
-          <div class="ticket-type">Match Ticket</div>
-          <div class="card-header-line">
-            <div class="card-title-main">AC Milan vs Hellas Verona</div>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Date &amp; Time</span>
-            <span class="card-row-value">28/12/2025, 12:00</span>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Stadium</span>
-            <span class="card-row-value">San Siro</span>
-          </div>
-          <div class="card-row">
-            <span class="card-row-label">Seat</span>
-            <span class="card-row-value">[seat info – editable]</span>
-          </div>
-          <div class="card-note">
-            Notes: Show QR code from [ticket platform] (editable).
-          </div>
-        </div>
-      </div>
-
-      <!-- Accommodation Card -->
-      <div class="card" style="margin-top:0.75rem;">
-        <div class="ticket-type">Accommodation</div>
-        <div class="card-header-line">
-          <div class="card-title-main">[Hotel / Apartment Name – editable]</div>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Address</span>
-          <span class="card-row-value">[Address – editable]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Check-in</span>
-          <span class="card-row-value">25/12/2025 [time – editable]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Check-out</span>
-          <span class="card-row-value">30/12/2025 [time – editable]</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Booking Ref.</span>
-          <span class="card-row-value">[Booking reference – editable]</span>
-        </div>
-        <div class="card-note">
-          Other reservations (restaurants, tours, etc.): [add details as needed].
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================
-         Quick Info Section
-    ========================== -->
-    <section id="info-section">
-      <div class="section-tag">Info</div>
-      <div class="section-header-row">
-        <h2>ℹ️ Quick Info – Milano</h2>
-      </div>
-      <div class="card">
-        <ul class="info-list">
-          <li>
-            <span class="info-label">Emergency</span>
-            <div>EU emergency number: <strong>112</strong></div>
-          </li>
-          <li>
-            <span class="info-label">Hotel phone</span>
-            <div>[Hotel phone number – editable]</div>
-          </li>
-          <li>
-            <span class="info-label">Hotel address</span>
-            <div>[Hotel name &amp; full address – editable]</div>
-          </li>
-          <li>
-            <span class="info-label">San Siro</span>
-            <div>San Siro Stadium – Milan</div>
-          </li>
-          <li>
-            <span class="info-label">Main train station</span>
-            <div>Milano Centrale – Piazza Duca d'Aosta, 1</div>
-          </li>
-          <li>
-            <span class="info-label">Airport</span>
-            <div>Milan Malpensa (MXP) – Varese province, ~50km from city</div>
-          </li>
-        </ul>
-
-        <div class="phrases">
-          <div class="section-sub-hint" style="margin-bottom:0.35rem;">Useful Italian phrases</div>
-          <div class="phrase-item">
-            <span class="phrase-it">Buongiorno</span>
-            <span class="phrase-en">Good morning</span>
-          </div>
-          <div class="phrase-item">
-            <span class="phrase-it">Per favore</span>
-            <span class="phrase-en">Please</span>
-          </div>
-          <div class="phrase-item">
-            <span class="phrase-it">Grazie</span>
-            <span class="phrase-en">Thank you</span>
-          </div>
-          <div class="phrase-item">
-            <span class="phrase-it">Scusi / Mi scusi</span>
-            <span class="phrase-en">Excuse me / Sorry</span>
-          </div>
-          <div class="phrase-item">
-            <span class="phrase-it">Il conto, per favore</span>
-            <span class="phrase-en">The bill, please</span>
-          </div>
-          <div class="phrase-item">
-            <span class="phrase-it">Dov'è la metro?</span>
-            <span class="phrase-en">Where is the metro?</span>
-          </div>
-          <div class="phrase-item">
-            <span class="phrase-it">Un tavolo per tre</span>
-            <span class="phrase-en">A table for three</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================
-         Transport & Links Section
-    ========================== -->
-    <section id="transport-section">
-      <div class="section-tag">Transport</div>
-      <div class="section-header-row">
-        <h2>🚇 Transport &amp; Links</h2>
-      </div>
-      <div class="card">
-        <div class="link-grid">
-          <a href="#" class="link-button">
-            <span class="label">
-              <span>🌍</span>
-              <span>Open Milan in Google Maps</span>
-            </span>
-            <span class="hint">Tap to open</span>
-          </a>
-          <a href="#" class="link-button">
-            <span class="label">
-              <span>🏨</span>
-              <span>Directions: Hotel ➜ City Center</span>
-            </span>
-            <span class="hint">Add Google Maps link</span>
-          </a>
-          <a href="#" class="link-button">
-            <span class="label">
-              <span>⚽</span>
-              <span>Directions: Hotel ➜ San Siro</span>
-            </span>
-            <span class="hint">Add match-day route</span>
-          </a>
-          <a href="#" class="link-button">
-            <span class="label">
-              <span>🛫</span>
-              <span>MXP Airport website</span>
-            </span>
-            <span class="hint">Add official URL</span>
-          </a>
-          <a href="#" class="link-button">
-            <span class="label">
-              <span>🚉</span>
-              <span>Milan public transport / metro map</span>
-            </span>
-            <span class="hint">Add ATM / official link</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================
-         Packing Checklist Section
-    ========================== -->
-    <section id="checklist-section">
-      <div class="section-tag">Checklist</div>
-      <div class="section-header-row">
-        <h2>📦 Packing Checklist</h2>
-      </div>
-      <div class="card">
-        <!-- Essentials -->
-        <div class="checklist-group">
-          <div class="checklist-title">Essentials</div>
-          <ul class="checklist-items">
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Passport</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">ID</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Wallet &amp; credit cards</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Cash / Euro</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Phone</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Chargers &amp; cables</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Power adapter</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Clothing -->
-        <div class="checklist-group">
-          <div class="checklist-title">Clothing</div>
-          <ul class="checklist-items">
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Winter jacket / coat</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Sweaters / hoodies</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Jeans / pants</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Sneakers / comfortable shoes</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Match-day outfit</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Sleepwear &amp; underwear</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Toiletries -->
-        <div class="checklist-group">
-          <div class="checklist-title">Toiletries</div>
-          <ul class="checklist-items">
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Toothbrush &amp; toothpaste</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Shampoo / soap</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Deodorant</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Medication / vitamins</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Skincare / other</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Stadium Day -->
-        <div class="checklist-group">
-          <div class="checklist-title">Stadium Day</div>
-          <ul class="checklist-items">
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Scarf / team gear</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Hat &amp; gloves</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Power bank</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Tickets on phone / printed</span>
-            </li>
-            <li class="checklist-item">
-              <input type="checkbox" />
-              <span class="text">Small bag (stadium-approved)</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================
-         Notes Section
-    ========================== -->
-    <section id="notes-section">
-      <div class="section-tag">Notes</div>
-      <div class="section-header-row">
-        <h2>📝 Trip Notes</h2>
-      </div>
-      <div class="card">
-        <textarea
-          class="notes-area"
-          placeholder="Write quick notes here during the trip: restaurants to try, things you liked, to-dos, reminders, etc. (No save after refresh – just for quick use during the session.)"
-        ></textarea>
-      </div>
-    </section>
-  </main>
-
-  <!-- =========================
-       Sticky Bottom Navigation
-  ========================== -->
-  <nav class="bottom-nav">
-    <button class="nav-item nav-link active" data-target="map-section">
-      <span class="icon">🗺️</span>
-      <span class="label">Map</span>
-    </button>
-    <button class="nav-item nav-link" data-target="schedule-section">
-      <span class="icon">📆</span>
-      <span class="label">Schedule</span>
-    </button>
-    <button class="nav-item nav-link" data-target="flights-section">
-      <span class="icon">✈️</span>
-      <span class="label">Flights</span>
-    </button>
-    <button class="nav-item nav-link" data-target="tickets-section">
-      <span class="icon">🎟️</span>
-      <span class="label">Tickets</span>
-    </button>
-    <button class="nav-item nav-link" data-target="info-section">
-      <span class="icon">ℹ️</span>
-      <span class="label">Info</span>
-    </button>
-    <button class="nav-item nav-link" data-target="transport-section">
-      <span class="icon">🚇</span>
-      <span class="label">Transport</span>
-    </button>
-    <button class="nav-item nav-link" data-target="checklist-section">
-      <span class="icon">✅</span>
-      <span class="label">Checklist</span>
-    </button>
-    <button class="nav-item nav-link" data-target="notes-section">
-      <span class="icon">📝</span>
-      <span class="label">Notes</span>
-    </button>
-  </nav>
-
-  <!-- =========================
-       JavaScript
-  ========================== -->
-  <script>
-    // Smooth scrolling for bottom nav
-    document.querySelectorAll(".nav-link").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var targetId = this.getAttribute("data-target");
-        var targetEl = document.getElementById(targetId);
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milan Trip: Dec 2025</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #003366; /* Deep Blue */
+            --accent: #C8102E; /* Milan Red */
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-radius: 12px;
+            --nav-height: 70px;
         }
 
-        // Highlight active nav item
-        document
-          .querySelectorAll(".nav-item")
-          .forEach(function (item) {
-            item.classList.remove("active");
-          });
-        this.classList.add("active");
-      });
-    });
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    // Checklist JS – visually mark completed items
-    document
-      .querySelectorAll(".checklist-item")
-      .forEach(function (item) {
-        var checkbox = item.querySelector('input[type="checkbox"]');
+        html {
+            scroll-behavior: smooth;
+        }
 
-        // When tapping anywhere on the row, toggle the checkbox
-        item.addEventListener("click", function (e) {
-          // Avoid double toggle when clicking directly on input
-          if (e.target.tagName.toLowerCase() !== "input") {
-            checkbox.checked = !checkbox.checked;
-          }
-          item.classList.toggle("completed", checkbox.checked);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: calc(var(--nav-height) + 20px); /* Space for bottom nav */
+            line-height: 1.5;
+        }
+
+        /* --- Layout Utilities --- */
+        .container {
+            max-width: 800px; /* Looks good on desktop too */
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        section {
+            margin-bottom: 40px;
+            scroll-margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 0 0 8px 0;
+            color: var(--text-main);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* --- Header / Hero --- */
+        header {
+            background: linear-gradient(135deg, var(--primary), #004080);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        header .subtext {
+            margin-top: 8px;
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        header .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        /* --- Map --- */
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- Schedule --- */
+        .schedule-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .event-item {
+            border-left: 3px solid #e5e7eb;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .event-item.highlight {
+            border-left-color: var(--accent);
+            background-color: #fff5f5;
+            padding: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .event-time {
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        /* --- Flights --- */
+        .flight-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .flight-route {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .flight-pnr {
+            font-family: monospace;
+            background: #eef2ff;
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .flight-detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .flight-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .flight-value {
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .editable-placeholder {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* --- Tickets --- */
+        .ticket-stub {
+            border: 2px dashed #e5e7eb;
+            background: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* --- Quick Info --- */
+        .phrase-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phrase-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .italian {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .english {
+            color: var(--text-muted);
+        }
+
+        /* --- Transport / Buttons --- */
+        .btn-link {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background: white;
+            padding: 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            border: 1px solid #e5e7eb;
+            transition: background 0.2s;
+        }
+
+        .btn-link:active {
+            background: #f3f4f6;
+        }
+
+        .btn-link i {
+            margin-right: 12px;
+            color: var(--primary);
+            width: 24px;
+            text-align: center;
+        }
+
+        /* --- Checklist --- */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            transform: scale(1.3);
+            margin-right: 16px;
+            accent-color: var(--primary);
+        }
+
+        .checklist-item.checked span {
+            text-decoration: line-through;
+            color: #d1d5db;
+        }
+
+        /* --- Notes --- */
+        textarea.notes-area {
+            width: 100%;
+            height: 150px;
+            padding: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            background-color: #fffff0; /* Sticky note color */
+        }
+
+        /* --- Sticky Bottom Nav --- */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            height: var(--nav-height);
+            display: flex;
+            overflow-x: auto; /* Allow scrolling if items don't fit */
+            z-index: 1000;
+            /* Hide scrollbar */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        nav.bottom-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+            min-width: 70px; /* Ensure touch target size */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            padding: 0 10px;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        /* Spacer for icons in text */
+        .icon-spacer { margin-right: 6px; }
+
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header>
+        <h1>Milan Trip</h1>
+        <div class="subtext">25 Dec – 30 Dec 2025</div>
+        <div class="subtext">Tel Aviv <i class="fa-solid fa-plane"></i> Milan <i class="fa-solid fa-plane"></i> Tel Aviv</div>
+        <div class="tag">3 Siblings | Winter Break</div>
+    </header>
+
+    <div class="container">
+
+        <!-- MAP SECTION -->
+        <!-- Responsive wrapper for Google MyMap -->
+        <section id="map">
+            <h2><i class="fa-solid fa-map-location-dot icon-spacer"></i> Trip Map</h2>
+            <div class="card">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1TklI730QBc74WHVjuBcQKjor6fi-beY&ehbc=2E312F"></iframe>
+                </div>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 12px; text-align: center;">
+                    Tap markers for food, shopping & sights.
+                </p>
+            </div>
+        </section>
+
+        <!-- SCHEDULE SECTION -->
+        <section id="schedule">
+            <h2><i class="fa-regular fa-calendar-days icon-spacer"></i> Schedule</h2>
+
+            <!-- Day 1 -->
+            <div class="card">
+                <span class="schedule-date">Thursday 25/12/2025 • Arrival</span>
+                <div class="event-item">
+                    <span class="event-time">[Time]</span> Arrive in Milan (MXP/LIN/BGY)
+                </div>
+                <div class="event-item">
+                    <span class="event-time">[Time]</span> Check-in to hotel
+                    <div style="font-size: 0.85rem; color: #666; margin-top: 4px;">[Address placeholder]</div>
+                </div>
+                <div class="event-item">
+                    <span class="event-time">Evening</span> Walk & Aperitivo
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="card">
+                <span class="schedule-date">Friday 26/12/2025</span>
+                <div class="event-item">
+                    <span class="event-time">Morning</span> [Activity placeholder]
+                </div>
+                <div class="event-item">
+                    <span class="event-time">Afternoon</span> [Activity placeholder]
+                </div>
+                <div class="event-item">
+                    <span class="event-time">Dinner</span> [Restaurant placeholder]
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="card">
+                <span class="schedule-date">Saturday 27/12/2025</span>
+                <div class="event-item">
+                    <span class="event-time">All Day</span> [Activity placeholder]
+                </div>
+            </div>
+
+            <!-- Day 4: MATCH DAY -->
+            <div class="card" style="border: 2px solid var(--accent);">
+                <span class="schedule-date" style="color: var(--accent);">Sunday 28/12/2025 • Match Day</span>
+                
+                <div class="event-item highlight">
+                    <div style="font-weight: bold; color: var(--accent); margin-bottom: 4px;">
+                        <i class="fa-solid fa-futbol"></i> AC Milan vs Hellas Verona
+                    </div>
+                    <span class="event-time">12:00</span> Kick-off at San Siro Stadium
+                </div>
+
+                <div class="event-item">
+                    <span class="event-time">[HH:MM]</span> Leave Hotel
+                </div>
+                <div class="event-item">
+                    <span class="event-time">Transport</span> Metro M5 (Lilac) to San Siro Stadio
+                </div>
+                <div class="event-item">
+                    <span class="event-time">Evening</span> Post-match dinner
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="card">
+                <span class="schedule-date">Monday 29/12/2025</span>
+                <div class="event-item">
+                    <span class="event-time">Day</span> Shopping / Sightseeing
+                </div>
+            </div>
+
+            <!-- Day 6: DEPARTURE -->
+            <div class="card">
+                <span class="schedule-date">Tuesday 30/12/2025 • Departure</span>
+                <div class="event-item">
+                    <span class="event-time">[Time]</span> Check-out
+                </div>
+                <div class="event-item">
+                    <span class="event-time">[Time]</span> Flight to TLV
+                </div>
+            </div>
+        </section>
+
+        <!-- FLIGHTS SECTION -->
+        <section id="flights">
+            <h2><i class="fa-solid fa-plane-departure icon-spacer"></i> Flights</h2>
+            
+            <p style="font-size: 0.9rem; margin-bottom: 15px;">
+                <strong>Wizz Air Malta</strong> (Invoice DWAM-40909873)<br>
+                Total Paid: 3286 ILS<br>
+                <small class="editable-placeholder">Boarding passes in App/Email</small>
+            </p>
+
+            <!-- Outbound -->
+            <div class="card">
+                <div class="flight-header">
+                    <div class="flight-route">TLV <i class="fa-solid fa-arrow-right" style="font-size: 0.8em;"></i> MXP</div>
+                    <div class="flight-pnr">ZM16VM</div>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Date</span>
+                    <span class="flight-value">25 Dec 2025</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Flight No.</span>
+                    <span class="flight-value editable-placeholder">[W4 XXXX]</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Departs (TLV)</span>
+                    <span class="flight-value editable-placeholder">[HH:MM]</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Arrives (MXP)</span>
+                    <span class="flight-value editable-placeholder">[HH:MM]</span>
+                </div>
+            </div>
+
+            <!-- Return -->
+            <div class="card">
+                <div class="flight-header">
+                    <div class="flight-route">MXP <i class="fa-solid fa-arrow-right" style="font-size: 0.8em;"></i> TLV</div>
+                    <div class="flight-pnr">ZM16VM</div>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Date</span>
+                    <span class="flight-value">30 Dec 2025</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Flight No.</span>
+                    <span class="flight-value editable-placeholder">[W4 XXXX]</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Departs (MXP)</span>
+                    <span class="flight-value editable-placeholder">[HH:MM]</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Arrives (TLV)</span>
+                    <span class="flight-value editable-placeholder">[HH:MM]</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKETS & RESERVATIONS -->
+        <section id="tickets">
+            <h2><i class="fa-solid fa-ticket icon-spacer"></i> Tickets</h2>
+
+            <!-- Flight Ticket Summary -->
+            <div class="card">
+                <h3><i class="fa-solid fa-plane"></i> Wizz Air Ticket</h3>
+                <div class="ticket-stub">
+                    <div><strong>PNR:</strong> ZM16VM</div>
+                    <div><strong>Invoice:</strong> DWAM-40909873</div>
+                    <div><strong>Cost:</strong> 3286 ILS</div>
+                    <div style="margin-top: 8px; font-size: 0.9rem; color: var(--accent);">
+                        <i class="fa-solid fa-circle-exclamation"></i> Check-in via App required
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match Ticket -->
+            <div class="card">
+                <h3><i class="fa-solid fa-futbol"></i> AC Milan vs Verona</h3>
+                <div class="ticket-stub">
+                    <div><strong>Date:</strong> 28/12/2025 @ 12:00</div>
+                    <div><strong>Venue:</strong> San Siro Stadium</div>
+                    <div class="editable-placeholder"><strong>Seats:</strong> [Sector X, Row Y, Seats Z]</div>
+                    <div style="margin-top: 8px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-qrcode"></i> Have QR codes ready on phone
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel -->
+            <div class="card">
+                <h3><i class="fa-solid fa-hotel"></i> Accommodation</h3>
+                <div class="ticket-stub">
+                    <div class="editable-placeholder"><strong>Hotel Name:</strong> [Enter Name]</div>
+                    <div class="editable-placeholder"><strong>Address:</strong> [Enter Address]</div>
+                    <div><strong>Check-in:</strong> 25/12/2025</div>
+                    <div><strong>Check-out:</strong> 30/12/2025</div>
+                    <div class="editable-placeholder"><strong>Ref:</strong> [Booking ID]</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK INFO -->
+        <section id="info">
+            <h2><i class="fa-solid fa-circle-info icon-spacer"></i> Quick Info</h2>
+            
+            <div class="card">
+                <div style="display: flex; align-items: center; margin-bottom: 12px; color: var(--accent);">
+                    <i class="fa-solid fa-phone" style="margin-right: 10px;"></i> 
+                    <strong>Emergency (EU): 112</strong>
+                </div>
+                <div class="editable-placeholder" style="margin-bottom: 8px;">
+                    <i class="fa-solid fa-phone" style="margin-right: 10px;"></i> Hotel: [+39 XXXXXX]
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Italian Basics</h3>
+                <ul class="phrase-list">
+                    <li>
+                        <span class="italian">Buongiorno</span>
+                        <span class="english">Good Morning</span>
+                    </li>
+                    <li>
+                        <span class="italian">Per favore</span>
+                        <span class="english">Please</span>
+                    </li>
+                    <li>
+                        <span class="italian">Grazie</span>
+                        <span class="english">Thank you</span>
+                    </li>
+                    <li>
+                        <span class="italian">Il conto, per favore</span>
+                        <span class="english">The bill, please</span>
+                    </li>
+                     <li>
+                        <span class="italian">Dov'è...?</span>
+                        <span class="english">Where is...?</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TRANSPORT LINKS -->
+        <section id="transport">
+            <h2><i class="fa-solid fa-train-subway icon-spacer"></i> Transport</h2>
+            
+            <a href="https://maps.google.com/?q=Milan" target="_blank" class="btn-link">
+                <i class="fa-brands fa-google"></i> Open Milan in Google Maps
+            </a>
+            <a href="#" class="btn-link editable-placeholder">
+                <i class="fa-solid fa-diamond-turn-right"></i> Directions: Hotel ➜ City Center
+            </a>
+            <a href="#" class="btn-link editable-placeholder">
+                <i class="fa-solid fa-diamond-turn-right"></i> Directions: Hotel ➜ San Siro
+            </a>
+            <a href="https://www.milanomalpensa-airport.com/en/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-plane"></i> MXP Airport Website
+            </a>
+            <a href="https://www.atm.it/en/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-train"></i> ATM (Metro/Tram) Info
+            </a>
+        </section>
+
+        <!-- CHECKLIST -->
+        <section id="checklist">
+            <h2><i class="fa-solid fa-clipboard-check icon-spacer"></i> Packing</h2>
+            
+            <div class="card">
+                <h3>Essentials</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Passport & ID</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Wallet (Cards & Euro Cash)</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Phone & Chargers</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Type C / L Power Adapter</span></div>
+            </div>
+
+            <div class="card">
+                <h3>Clothing (Winter)</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Winter Jacket / Coat</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Sweaters / Layers</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Jeans / Trousers</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Comfortable Walking Shoes</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Sleepwear</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Hat, Scarf, Gloves</span></div>
+            </div>
+
+            <div class="card">
+                <h3>Match Day</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Match Tickets (Phone/Print)</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Power Bank (Full charge)</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Red/Black scarf (Optional)</span></div>
+            </div>
+            
+            <div class="card">
+                <h3>Toiletries</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Toothbrush / Paste</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Deodorant</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Meds / Painkillers</span></div>
+            </div>
+        </section>
+
+        <!-- NOTES -->
+        <section id="notes">
+            <h2><i class="fa-solid fa-pen icon-spacer"></i> Notes</h2>
+            <textarea class="notes-area" placeholder="Type quick notes here (restaurants, places to remember, etc)..."></textarea>
+            <p style="font-size: 0.8rem; color: #999; margin-top: 8px;">* Notes are temporary and clear on refresh.</p>
+        </section>
+
+    </div> <!-- End Container -->
+
+    <!-- STICKY NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="#map" class="nav-item">
+            <i class="fa-solid fa-map"></i>
+            <span>Map</span>
+        </a>
+        <a href="#schedule" class="nav-item">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Plan</span>
+        </a>
+        <a href="#flights" class="nav-item">
+            <i class="fa-solid fa-plane"></i>
+            <span>Flights</span>
+        </a>
+        <a href="#tickets" class="nav-item">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Tix</span>
+        </a>
+        <a href="#info" class="nav-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Info</span>
+        </a>
+        <a href="#transport" class="nav-item">
+            <i class="fa-solid fa-train"></i>
+            <span>Travel</span>
+        </a>
+        <a href="#checklist" class="nav-item">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Pack</span>
+        </a>
+        <a href="#notes" class="nav-item">
+            <i class="fa-solid fa-pen"></i>
+            <span>Notes</span>
+        </a>
+    </nav>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Interactive Checkboxes
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('.checklist-item');
+                if(this.checked) {
+                    parent.classList.add('checked');
+                } else {
+                    parent.classList.remove('checked');
+                }
+            });
         });
 
-        // Sync class when checkbox is changed directly (keyboard, etc.)
-        checkbox.addEventListener("change", function () {
-          item.classList.toggle("completed", checkbox.checked);
+        // 2. Active State for Navigation on Scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Offset for header height approx
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                    // Optional: scroll nav to keep active item in view if nav overflows
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
         });
-      });
-  </script>
+    </script>
+
 </body>
 </html>
