@@ -35,11 +35,27 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
-            color: var(--text-main);
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #f8fafc; /* brighter default text for dark background */
             margin: 0;
             padding: 0;
             padding-bottom: calc(var(--nav-height) + 20px); /* Space for bottom nav */
             line-height: 1.5;
+            position: relative;
+            isolation: isolate; /* ensures pseudo-element stays behind content */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* --- Layout Utilities --- */
@@ -47,16 +63,28 @@
             max-width: 800px; /* Looks good on desktop too */
             margin: 0 auto;
             padding: 16px;
+            color: var(--text-main); /* keep content text dark on white cards */
         }
 
         section {
             margin-bottom: 40px;
             scroll-margin-top: 20px;
         }
+        
+        /* Text outside cards needs extra contrast on dark bg */
+        section > p,
+        section > p * {
+            color: #f8fafc;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.65);
+        }
+        
+        .section-note {
+            color: #f8fafc;
+        }
 
         h2 {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: #f8fafc;
             margin-bottom: 16px;
             border-left: 5px solid var(--accent);
             padding-left: 10px;
@@ -925,7 +953,7 @@
             </a>
             
             <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
-                <h3 style="color: var(--primary); margin-bottom: 12px;"><i class="fa-solid fa-plane"></i> Airport Transport (MXP)</h3>
+                <h3 style="color: #f8fafc; margin-bottom: 12px;"><i class="fa-solid fa-plane"></i> Airport Transport (MXP)</h3>
                 
                 <!-- FROM AIRPORT TO APARTMENT -->
                 <div class="card" style="margin-bottom: 16px; background: #f0fdf4; border-left: 4px solid #22c55e;">
@@ -1004,7 +1032,7 @@
             </div>
             
             <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
-                <h3 style="color: var(--primary); margin-bottom: 12px;">Day Trips from Apartment</h3>
+                <h3 style="color: #f8fafc; margin-bottom: 12px;">Day Trips from Apartment</h3>
                 <div style="background: #f9fafb; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem; color: #666;">
                     <strong style="color: var(--primary);">You're in the ideal location:</strong><br>
                     • <strong>Lake Como:</strong> Direct train from Cadorna → 1 hour<br>
@@ -1015,7 +1043,7 @@
             </div>
             
             <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
-                <h3 style="color: var(--primary); margin-bottom: 12px;">Lake Como Day Trip (27/12)</h3>
+                <h3 style="color: #f8fafc; margin-bottom: 12px;">Lake Como Day Trip (27/12)</h3>
             </div>
             
             <a href="https://www.trenord.it/en/" target="_blank" class="btn-link">
@@ -1038,7 +1066,7 @@
             </a>
             
             <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
-                <h3 style="color: var(--primary); margin-bottom: 12px;">Optional Transport Service</h3>
+                <h3 style="color: #f8fafc; margin-bottom: 12px;">Optional Transport Service</h3>
                 <div style="background: #f0fdf4; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem; color: #666; border-left: 3px solid #22c55e;">
                     <div style="margin-bottom: 8px;">
                         <strong style="color: var(--primary);">Property offers (subject to availability):</strong>
