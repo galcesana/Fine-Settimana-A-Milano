@@ -23,8 +23,8 @@ Edit the files locally, push updates to GitHub, and the live version automatical
 
 ## 🌐 Deployment
 
-When deployed with GitHub Pages, the site will be available at a link like:
-''' https://<your-username>.github.io/Fine-Settimana-A-Milano/ '''
+- Live site: https://galcesana.com/Fine-Settimana-A-Milano/
+- GitHub Pages pattern: `https://<your-username>.github.io/Fine-Settimana-A-Milano/`
 
 ## ✨ Future Additions
 
