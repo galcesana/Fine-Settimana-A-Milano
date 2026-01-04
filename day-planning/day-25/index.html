@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 • Thu 25 Dec • Arrival</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary:#003366; --accent:#C8102E; --bg:#f4f6f8; --card:#fff; --text:#1f2937; --muted:#6b7280; --radius:12px; }
+        *{box-sizing:border-box;}
+        body{
+            margin:0;
+            font-family:'Inter',sans-serif;
+            background: var(--bg) url('../../assets/background.jpg') center/cover no-repeat fixed;
+            color:var(--text);
+            padding:16px;
+            position:relative;
+            isolation:isolate;
+        }
+        body::before{
+            content:'';
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.5);
+            backdrop-filter: blur(6px);
+            z-index:-1;
+            pointer-events:none;
+        }
+        .container{max-width:820px;margin:0 auto;}
+        h1,h2,h3{margin:0 0 12px 0;}
+        h1{color:var(--primary);}
+        h2{color:var(--primary);font-size:1.2rem;display:flex;align-items:center;gap:8px;}
+        .card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.05);}
+        .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:var(--primary);font-weight:600;font-size:0.9rem;margin-right:8px;}
+        .cta{display:inline-block;margin-top:10px;padding:10px 14px;background:var(--primary);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;}
+        .muted{color:var(--muted);font-size:0.9rem;}
+        ol{padding-left:18px;margin:0;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Day 1 • Thu 25 Dec • Arrival</h1>
+
+    <div class="card" style="background:#f0f9ff;border-left:4px solid #3b82f6;">
+        <div><span class="pill"><i class="fa-solid fa-plane-arrival"></i> Flight</span> W46406 • TLV → MXP</div>
+        <div style="margin-top:6px;">Arrive MXP: <strong>15:30</strong> • Travel time ~4h25m</div>
+        <div style="margin-top:6px;">Address: Via Francesco Novati 3 (near Cadorna)</div>
+    </div>
+
+    <div class="card" style="background:#f0fdf4;border-left:4px solid #22c55e;">
+        <h2><i class="fa-solid fa-train"></i> MXP → Apartment (Best)</h2>
+        <div style="font-size:0.95rem;">
+            <strong>Malpensa Express to Milano Cadorna</strong><br>
+            • Buy ticket: €13 pp (machines/counter)<br>
+            • Ride: ~35–37 min<br>
+            • Walk: 6–7 min to Via Francesco Novati 3<br>
+            <div class="muted" style="margin-top:6px;">Ideal timeline: land 15:30 → train ~16:00 → apartment ~16:40.</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2><i class="fa-solid fa-door-open"></i> Check-in & Access</h2>
+        <div style="font-size:0.95rem;">
+            • Check-in window: 15:00–16:00<br>
+            • Use virtual key: <a href="#">XXX-XXX-XXX</a><br>
+            • Building code (intercom): Press bell → wait for tone → enter <strong>*XXX*</strong> → press call<br>
+            • Safebox code: Gray keybox on right → enter <strong>*XX*</strong> → press unlock (keys inside; return on checkout)
+        </div>
+        <a class="cta" href="../../more-info/checkin/">Full check-in guide</a>
+    </div>
+
+    <div class="card">
+        <h2><i class="fa-solid fa-map-pin"></i> Light Plan</h2>
+        <ol style="font-size:0.95rem;">
+            <li>Train to Cadorna + short walk to apartment.</li>
+            <li>Settle in, groceries/essentials if needed.</li>
+            <li>Evening: easy stroll + aperitivo near Duomo/Brera/Navigli.</li>
+        </ol>
+    </div>
+
+    <div class="muted">Tip: Screenshot this page and the codes before landing.</div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in Guide • Homie Apartment - Sant'Ambrogio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --accent: #C8102E;
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-radius: 12px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg) url('../../assets/background.jpg') center/cover no-repeat fixed;
+            color: var(--text-main);
+            padding: 16px;
+            position: relative;
+            isolation: isolate;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(6px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 { margin: 0 0 12px 0; }
+        h1 { color: var(--primary); }
+        h2 { font-size: 1.2rem; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        a { color: var(--primary); }
+        .pill {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+        ol { padding-left: 18px; margin: 0; }
+        ul { padding-left: 18px; margin: 0; }
+        .cta {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .muted { color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Homie Apartment - Sant'Ambrogio</h1>
+        <div class="card" style="background: #f0f9ff; border-left: 4px solid #3b82f6;">
+            <div><span class="pill"><i class="fa-solid fa-user"></i> Guest</span> Gal Cesana</div>
+            <div><span class="pill"><i class="fa-solid fa-hashtag"></i> Reservation</span> XXXXXXXX</div>
+            <div style="margin-top: 6px;">📍 Via Francesco Novati, 3, Milano</div>
+            <div style="margin-top: 6px;">
+                Check-in: Thu 25 Dec 2025 from 15:00<br>
+                Check-out: Tue 30 Dec 2025 by 10:00
+            </div>
+        </div>
+
+        <div class="card" style="background: #f0fdf4; border-left: 4px solid #22c55e;">
+            <h2><i class="fa-solid fa-key"></i> Virtual Key</h2>
+            <div style="font-size: 0.95rem;">
+                Active 25–30 Dec via link (needs internet):<br>
+                <a href="#">XXX-XXX-XXX</a>
+            </div>
+            <a class="cta" href="../../index.html#checkin">Back to main plan</a>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-door-closed"></i> Access Steps</h2>
+            <ol style="font-size: 0.95rem;">
+                <li style="margin-bottom: 10px;">
+                    <strong>Building door (Intercom - Step 1):</strong><br>
+                    Press bell button → wait for tone → enter <strong>*XXX*</strong> → press call button.
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <strong>Apartment door (Safebox - Step 2):</strong><br>
+                    Locate gray keybox on the right side → enter <strong>*XX*</strong> → press unlock → pull door handle.
+                </li>
+                <li>
+                    <strong>Keys:</strong> One set inside the flat. Leave keys in safebox at check-out.
+                </li>
+            </ol>
+        </div>
+
+        <div class="card" style="background: #fff7ed; border-left: 4px solid #f59e0b;">
+            <h2><i class="fa-solid fa-triangle-exclamation"></i> House Rules & Penalties</h2>
+            <ul style="font-size: 0.95rem; color: #92400e;">
+                <li>No smoking inside the house.</li>
+                <li>No disturbing noise; extra quiet 22:00–08:00.</li>
+                <li>Only registered guests; others need prior authorization (may incur visitor tax).</li>
+                <li>No parties or receptions.</li>
+                <li>Follow rubbish separation rules (posted inside the flat).</li>
+            </ul>
+            <div style="margin-top: 10px; font-size: 0.9rem;">
+                Penalties: Late check-out €50; loss of keys €50; rule violations can lead to removal with no reimbursement; damages must be compensated.
+            </div>
+        </div>
+
+        <div class="card" style="background: #e6f2ff; border-left: 4px solid #003366;">
+            <h2><i class="fa-solid fa-phone"></i> Assistance Contacts</h2>
+            <div style="font-size: 0.95rem;">
+                <div style="margin-bottom: 6px;"><strong>Alice / Carolina:</strong> <a href="#">+XX XXX XXX XXXX</a></div>
+                <div style="margin-bottom: 6px;"><strong>Riccardo:</strong> <a href="#">+XX XXX XXX XXXX</a></div>
+                <div><strong>Joseph:</strong> <a href="#">+XX XXX XXX XXXX</a></div>
+            </div>
+        </div>
+
+        <div class="muted">
+            Keep this page available offline or screenshot the codes before arrival.
+        </div>
+    </div>
+</body>
+</html>
+

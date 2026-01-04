@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milan Trip: Dec 2025</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #003366; /* Deep Blue */
+            --accent: #C8102E; /* Milan Red */
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-radius: 12px;
+            --nav-height: 70px;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #f8fafc; /* brighter default text for dark background */
+            margin: 0;
+            padding: 0;
+            padding-bottom: calc(var(--nav-height) + 20px); /* Space for bottom nav */
+            line-height: 1.5;
+            position: relative;
+            isolation: isolate; /* ensures pseudo-element stays behind content */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Layout Utilities --- */
+        .container {
+            max-width: 800px; /* Looks good on desktop too */
+            margin: 0 auto;
+            padding: 16px;
+            color: var(--text-main); /* keep content text dark on white cards */
+        }
+
+        section {
+            margin-bottom: 40px;
+            scroll-margin-top: 20px;
+        }
+        
+        /* Text outside cards needs extra contrast on dark bg */
+        section > p,
+        section > p * {
+            color: #f8fafc;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.65);
+        }
+        
+        .section-note {
+            color: #f8fafc;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #f8fafc;
+            margin-bottom: 16px;
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 0 0 8px 0;
+            color: var(--text-main);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* --- Header / Hero --- */
+        header {
+            background: linear-gradient(135deg, var(--primary), #004080);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        header .subtext {
+            margin-top: 8px;
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        header .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        /* --- Map --- */
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- Schedule --- */
+        .schedule-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .event-item {
+            border-left: 3px solid #e5e7eb;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .event-item.highlight {
+            border-left-color: var(--accent);
+            background-color: #fff5f5;
+            padding: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .event-time {
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .event-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .event-link i { color: var(--primary); }
+
+        /* --- Flights --- */
+        .flight-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .flight-route {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .flight-pnr {
+            font-family: monospace;
+            background: #eef2ff;
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .flight-detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .flight-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .flight-value {
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .editable-placeholder {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* --- Tickets --- */
+        .ticket-stub {
+            border: 2px dashed #e5e7eb;
+            background: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* --- Quick Info --- */
+        .phrase-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phrase-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .italian {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .english {
+            color: var(--text-muted);
+        }
+
+        /* --- Transport / Buttons --- */
+        .btn-link {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background: white;
+            padding: 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            border: 1px solid #e5e7eb;
+            transition: background 0.2s;
+        }
+
+        .btn-link:active {
+            background: #f3f4f6;
+        }
+
+        .btn-link i {
+            margin-right: 12px;
+            color: var(--primary);
+            width: 24px;
+            text-align: center;
+        }
+
+        /* --- Checklist --- */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            transform: scale(1.3);
+            margin-right: 16px;
+            accent-color: var(--primary);
+        }
+
+        .checklist-item.checked span {
+            text-decoration: line-through;
+            color: #d1d5db;
+        }
+
+        /* --- Notes --- */
+        textarea.notes-area {
+            width: 100%;
+            height: 150px;
+            padding: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            background-color: #fffff0; /* Sticky note color */
+        }
+
+        /* --- Sticky Bottom Nav --- */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            height: var(--nav-height);
+            display: flex;
+            overflow-x: auto; /* Allow scrolling if items don't fit */
+            z-index: 1000;
+            /* Hide scrollbar */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        nav.bottom-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+            min-width: 70px; /* Ensure touch target size */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            padding: 0 10px;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        /* Spacer for icons in text */
+        .icon-spacer { margin-right: 6px; }
+
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header>
+        <h1>Milan Trip</h1>
+        <div class="subtext">25 Dec – 30 Dec 2025</div>
+        <div class="subtext">Tel Aviv <i class="fa-solid fa-plane"></i> Milan <i class="fa-solid fa-plane"></i> Tel Aviv</div>
+        <div class="tag">3 Siblings | Winter Break</div>
+    </header>
+
+    <div class="container">
+
+        <!-- MAP SECTION -->
+        <!-- Responsive wrapper for Google MyMap -->
+        <section id="map">
+            <h2><i class="fa-solid fa-map-location-dot icon-spacer"></i> Trip Map</h2>
+            <div class="card">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1TklI730QBc74WHVjuBcQKjor6fi-beY&ehbc=2E312F"></iframe>
+                </div>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 12px; text-align: center;">
+                    Tap markers for food, shopping & sights.
+                </p>
+            </div>
+        </section>
+
+        <!-- SCHEDULE SECTION -->
+        <section id="schedule">
+            <h2><i class="fa-regular fa-calendar-days icon-spacer"></i> Schedule</h2>
+
+            <!-- Day 1 -->
+            <div class="card">
+                <span class="schedule-date">Thursday 25/12/2025 • Arrival</span>
+                <div class="event-item"><span class="event-time">15:30</span> Land MXP • W46406</div>
+                <div class="event-item"><span class="event-time">~16:30</span> Train to Cadorna, walk to apartment</div>
+                <div class="event-item"><span class="event-time">Evening</span> Light walk & aperitivo nearby</div>
+                <a class="event-link" href="day-planning/day-25/"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full day details</a>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="card" style="border: 2px solid #003366;">
+                <span class="schedule-date" style="color: #003366;">Friday 26/12/2025 • City Highlights</span>
+                <div class="event-item"><span class="event-time">10:30</span> Coffee & pastries near apartment</div>
+                <div class="event-item"><span class="event-time">12:00</span> Duomo & Galleria (rooftops if clear)</div>
+                <div class="event-item"><span class="event-time">13:30</span> Lunch in the center</div>
+                <div class="event-item"><span class="event-time">14:30</span> Brera wander</div>
+                <div class="event-item"><span class="event-time">16:00</span> Sforza Castle → Parco Sempione → Arco della Pace</div>
+                <div class="event-item"><span class="event-time">17:30</span> Duomo Christmas Market</div>
+                <div class="event-item"><span class="event-time">19:00</span> Aperitivo (Brera / Corso Como / Navigli)</div>
+                <div class="event-item"><span class="event-time">20:30</span> Dinner</div>
+                <div class="event-item"><span class="event-time">22:30</span> Night walk or drinks</div>
+                <a class="event-link" href="day-planning/day-26/"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full day details</a>
+            </div>
+
+            <!-- Day 3: Lake Como + Brunate -->
+            <div class="card" style="border: 2px solid #003366;">
+                <span class="schedule-date" style="color: #003366;">Saturday 27/12/2025 • Lake Como + Brunate</span>
+                <div class="event-item"><span class="event-time">08:30–09:30</span> Train Milan → Como</div>
+                <div class="event-item"><span class="event-time">09:30–12:00</span> Como old town & lakefront</div>
+                <div class="event-item"><span class="event-time">12:00–15:00</span> Funicular to Brunate, lunch, viewpoints</div>
+                <div class="event-item"><span class="event-time">15:00–17:30</span> Back to Como • optional ferry</div>
+                <div class="event-item"><span class="event-time">17:30–19:00</span> Aperitivo / early dinner in Como</div>
+                <div class="event-item"><span class="event-time">Evening</span> Train back to Milan</div>
+                <a class="event-link" href="day-planning/day-27/"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full day details</a>
+            </div>
+
+            <!-- Day 4: MATCH DAY -->
+            <div class="card" style="border: 2px solid var(--accent);">
+                <span class="schedule-date" style="color: var(--accent);">Sunday 28/12/2025 • Match Day</span>
+                <div class="event-item"><span class="event-time">10:15–10:30</span> Leave apartment</div>
+                <div class="event-item"><span class="event-time">12:00</span> AC Milan vs Hellas Verona (San Siro)</div>
+                <div class="event-item"><span class="event-time">Evening</span> Post-match dinner</div>
+                <a class="event-link" href="day-planning/day-28/"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full day details</a>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="card">
+                <span class="schedule-date">Monday 29/12/2025 • City Day</span>
+                <div class="event-item"><span class="event-time">Day</span> Shopping / sightseeing (flex)</div>
+                <div class="event-item"><span class="event-time">Evening</span> Dinner & drinks</div>
+                <a class="event-link" href="day-planning/day-29/"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full day details</a>
+            </div>
+
+            <!-- Day 6: DEPARTURE -->
+            <div class="card">
+                <span class="schedule-date">Tuesday 30/12/2025 • Departure</span>
+                <div class="event-item"><span class="event-time">10:00</span> Check-out</div>
+                <div class="event-item"><span class="event-time">~10:30</span> Leave for MXP (Malpensa Express)</div>
+                <div class="event-item"><span class="event-time">13:05</span> Flight to TLV • W46403</div>
+                <a class="event-link" href="day-planning/day-30/"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full day details</a>
+            </div>
+        </section>
+
+        <!-- FLIGHTS SECTION -->
+        <section id="flights">
+            <h2><i class="fa-solid fa-plane-departure icon-spacer"></i> Flights</h2>
+            
+            <p style="font-size: 0.9rem; margin-bottom: 15px;">
+                <strong>Wizz Air Malta</strong> (Invoice DWAM-40909873)<br>
+                Total Paid: 3286 ILS<br>
+                <small class="editable-placeholder">Boarding passes in App/Email</small>
+            </p>
+
+            <!-- Outbound -->
+            <div class="card">
+                <div class="flight-header">
+                    <div class="flight-route">TLV <i class="fa-solid fa-arrow-right" style="font-size: 0.8em;"></i> MXP</div>
+                    <div class="flight-pnr">*flight-pnr*</div>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Date</span>
+                    <span class="flight-value">25 Dec 2025</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Flight No.</span>
+                    <span class="flight-value">W46406</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Departs (TLV)</span>
+                    <span class="flight-value">12:05 PM</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Arrives (MXP)</span>
+                    <span class="flight-value">15:30 PM</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Travel Time</span>
+                    <span class="flight-value">4h 25m</span>
+                </div>
+                <div style="margin-top: 8px; padding: 8px; background: #f0fdf4; border-radius: 6px; border-left: 3px solid #22c55e;">
+                    <span style="color: #22c55e; font-weight: 600; font-size: 0.85rem;">
+                        <i class="fa-solid fa-circle-check"></i> Confirmed
+                    </span>
+                </div>
+            </div>
+
+            <!-- Return -->
+            <div class="card">
+                <div class="flight-header">
+                    <div class="flight-route">MXP <i class="fa-solid fa-arrow-right" style="font-size: 0.8em;"></i> TLV</div>
+                    <div class="flight-pnr">*flight-pnr*</div>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Date</span>
+                    <span class="flight-value">30 Dec 2025</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Flight No.</span>
+                    <span class="flight-value">W46403</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Departs (MXP)</span>
+                    <span class="flight-value">13:05 PM</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Arrives (TLV)</span>
+                    <span class="flight-value">18:05 PM</span>
+                </div>
+                <div class="flight-detail-row">
+                    <span class="flight-label">Travel Time</span>
+                    <span class="flight-value">4h 0m</span>
+                </div>
+                <div style="margin-top: 8px; padding: 8px; background: #f0fdf4; border-radius: 6px; border-left: 3px solid #22c55e;">
+                    <span style="color: #22c55e; font-weight: 600; font-size: 0.85rem;">
+                        <i class="fa-solid fa-circle-check"></i> Confirmed
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKETS & RESERVATIONS -->
+        <section id="tickets">
+            <h2><i class="fa-solid fa-ticket icon-spacer"></i> Tickets</h2>
+
+            <!-- Flight Ticket Summary -->
+            <div class="card">
+                <h3><i class="fa-solid fa-plane"></i> Wizz Air Ticket</h3>
+                <div class="ticket-stub">
+                    <div><strong>PNR:</strong> XXXXXX</div>
+                    <div><strong>Invoice:</strong> DWAM-40909873</div>
+                    <div><strong>Cost:</strong> 3286 ILS</div>
+                    <div style="margin-top: 12px; padding: 10px; background: #eff6ff; border-radius: 6px; border-left: 3px solid #3b82f6;">
+                        <div style="font-size: 0.9rem; color: #1e40af; margin-bottom: 6px;">
+                            <i class="fa-solid fa-laptop"></i> <strong>Online Check-in:</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #666;">
+                            Not available yet. Check-in will open in <strong style="color: #22c55e;">1 day(s)</strong>.<br>
+                            <i class="fa-solid fa-circle-info" style="margin-top: 6px; display: block;"></i> You can add Auto Check-in in the Wizz Air app.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match Ticket -->
+            <div class="card">
+                <h3><i class="fa-solid fa-futbol"></i> AC Milan vs Hellas Verona</h3>
+                <div class="ticket-stub">
+                    <div><strong>Date:</strong> 28/12/2025 @ 12:00</div>
+                    <div><strong>Venue:</strong> San Siro Stadium</div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e5e7eb;">
+                        <div style="font-weight: 600; color: var(--primary); margin-bottom: 8px;">
+                            <i class="fa-solid fa-chair"></i> Seat Information:
+                        </div>
+                        <div style="font-size: 0.9rem; color: #666;">
+                            <div style="margin-bottom: 8px; padding: 8px; background: #f9fafb; border-radius: 6px;">
+                                <strong>GAL CESANA</strong><br>
+                                Sector: <strong>TERZO ROSSO LATERALE (322)</strong><br>
+                                Row: <strong>3</strong> • Seat: <strong>11</strong>
+                            </div>
+                            <div style="margin-bottom: 8px; padding: 8px; background: #f9fafb; border-radius: 6px;">
+                                <strong>OR FELIX CESANA</strong><br>
+                                Sector: <strong>TERZO ROSSO LATERALE (322)</strong><br>
+                                Row: <strong>3</strong> • Seat: <strong>10</strong>
+                            </div>
+                            <div style="padding: 8px; background: #f9fafb; border-radius: 6px;">
+                                <strong>LINAT CESANA KALIFA</strong><br>
+                                Sector: <strong>TERZO ROSSO LATERALE (322)</strong><br>
+                                Row: <strong>3</strong> • Seat: <strong>9</strong>
+                            </div>
+                        </div>
+                        <div style="margin-top: 8px; padding: 8px; background: #eff6ff; border-radius: 6px; border-left: 3px solid var(--accent); font-size: 0.85rem; color: #666;">
+                            <i class="fa-solid fa-info-circle" style="color: var(--accent);"></i> All seats together in <strong>TERZO ROSSO LATERALE</strong> sector, block <strong>322</strong>, Row <strong>3</strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-qrcode"></i> Have QR codes ready on phone
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel -->
+            <div class="card">
+                <h3><i class="fa-solid fa-hotel"></i> Accommodation</h3>
+                <div class="ticket-stub">
+                    <div><strong>Apartment:</strong> HL Apartment - Sant'Ambrogio, Duomo</div>
+                    <div><strong>Address:</strong> Via Francesco Novati 3, Milan City Centre, 20123 Milan, Italy</div>
+                    <div><strong>Check-in:</strong> 25/12/2025 (15:00–16:00)</div>
+                    <div style="font-size: 0.85rem; color: #666; margin-top: 4px;">
+                        <i class="fa-solid fa-circle-info"></i> Contact host to confirm arrival time
+                    </div>
+                    <div><strong>Check-out:</strong> 30/12/2025 (10:00)</div>
+                    <div><strong>Guests:</strong> 3 adults • 5 nights</div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e5e7eb;">
+                        <strong>Total Price:</strong> €1,047.18<br>
+                        <div style="font-size: 0.85rem; color: #666; margin-top: 4px; padding-left: 12px;">
+                            • Apartment: €872.22<br>
+                            • VAT: €87.22<br>
+                            • City tax: €94.50<br>
+                            • Cleaning fee: €70.00<br>
+                            • Booking.com discount: -€76.76
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; padding: 10px; background: #fff7ed; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                        <div style="font-size: 0.9rem; color: #92400e; margin-bottom: 6px;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> <strong>Cancellation Policy:</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #666;">
+                            Free cancellation until <strong>17 Dec 2025 at 23:59</strong><br>
+                            From <strong>18 Dec 2025 at 00:00</strong>, cancellation incurs full cost (€959.44)
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; padding: 10px; background: #eff6ff; border-radius: 6px; border-left: 3px solid #3b82f6;">
+                        <div style="font-size: 0.9rem; color: #1e40af; margin-bottom: 6px;">
+                            <i class="fa-solid fa-circle-exclamation"></i> <strong>Important:</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #666;">
+                            You will receive a <strong>Vikey email</strong> for:<br>
+                            • Online check-in<br>
+                            • Uploading guest information<br>
+                            • Paying tourist tax<br>
+                            • Receiving access codes & instructions<br><br>
+                            <span style="color: var(--accent); font-weight: 600;">⚠️ Reservation not fully confirmed until Vikey check-in is completed</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <a href="https://www.booking.com/hotel/it/homie-apartment-sant-ambrogio.he.html?label=gog235jc-10CAEoggI46AdIM1gDaGqIAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4Au6knckGwAIB0gIkYjVkNTdlNmYtNDgxOS00NjZlLTk3YzYtOWNhYzE2MTAzYTRl2AIB4AIB&aid=397594&ucfs=1&checkin=2025-12-25&checkout=2025-12-30&dest_id=2303&dest_type=district&group_adults=3&no_rooms=1&group_children=0&nflt=review_score%3D80%3Bprice%3DILS-min-800-1&srpvid=465087c33a100012&srepoch=1764184744&matching_block_id=1040274401_385009521_3_0_0&atlas_src=sr_iw_title" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">
+                            <i class="fa-solid fa-link"></i> View on Booking.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECK-IN GUIDE -->
+        <section id="checkin">
+            <h2><i class="fa-solid fa-door-open icon-spacer"></i> Check-in & Access</h2>
+
+            <div class="card">
+                <h3 style="margin-top: 0;">Summary</h3>
+                <div style="font-size: 0.95rem; color: #666;">
+                    <div><strong>Guest:</strong> Gal Cesana</div>
+                    <div><strong>Reservation Code:</strong> XXXXXXXX</div>
+                    <div><strong>Address:</strong> Via Francesco Novati, 3, Milano</div>
+                    <div><strong>Check-in:</strong> Thu 25 Dec 2025 from 15:00</div>
+                    <div><strong>Check-out:</strong> Tue 30 Dec 2025 by 10:00</div>
+                    <div style="margin-top: 8px;">
+                        <a href="more-info/checkin/" style="color: var(--primary); font-weight: 600;">Open full check-in page</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="background: #f0fdf4; border-left: 4px solid #22c55e;">
+                <h3 style="margin-top: 0;"><i class="fa-solid fa-key"></i> Virtual Key</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    Active 25–30 Dec via link (needs internet):<br>
+                    <a href="#" style="color: var(--primary); word-break: break-all;">XXX-XXX-XXX</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-top: 0;"><i class="fa-solid fa-door-closed"></i> Access Steps</h3>
+                <ol style="margin: 0; padding-left: 18px; color: #444; font-size: 0.95rem;">
+                    <li style="margin-bottom: 8px;">
+                        <strong>Building door (Intercom - Step 1):</strong><br>
+                        Press bell button → wait for tone → enter <strong>*XXX*</strong> → press call button.
+                    </li>
+                    <li style="margin-bottom: 8px;">
+                        <strong>Apartment door (Safebox - Step 2):</strong><br>
+                        Locate gray keybox on the right side → enter <strong>*XX*</strong> → press unlock → pull door handle.
+                    </li>
+                    <li>
+                        <strong>Keys:</strong> One set inside the flat. Leave keys in safebox at check-out.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="card" style="background: #fff7ed; border-left: 4px solid #f59e0b;">
+                <h3 style="margin-top: 0;"><i class="fa-solid fa-triangle-exclamation"></i> House Rules & Penalties</h3>
+                <ul style="margin: 0; padding-left: 18px; color: #92400e; font-size: 0.95rem;">
+                    <li><strong>No smoking</strong> inside the house.</li>
+                    <li><strong>No noise</strong> disturbances; extra quiet 22:00–08:00.</li>
+                    <li><strong>Registered guests only</strong>; others need prior authorization (may incur visitor tax).</li>
+                    <li><strong>No parties</strong> or receptions.</li>
+                    <li>Follow rubbish separation rules (posted inside the flat).</li>
+                </ul>
+                <div style="margin-top: 10px; color: #92400e; font-size: 0.9rem;">
+                    Penalties: Late check-out €50; loss of keys €50; rule violations can lead to removal with no reimbursement; damages must be compensated.
+                </div>
+            </div>
+
+            <div class="card" style="background: #e6f2ff; border-left: 4px solid #003366;">
+                <h3 style="margin-top: 0;"><i class="fa-solid fa-phone"></i> Assistance Contacts</h3>
+                <div style="font-size: 0.95rem; color: #1f2937;">
+                    <div style="margin-bottom: 6px;"><strong>Alice / Carolina:</strong> <a href="#" style="color: var(--primary);">+XX XXX XXX XXXX</a></div>
+                    <div style="margin-bottom: 6px;"><strong>Riccardo:</strong> <a href="#" style="color: var(--primary);">+XX XXX XXX XXXX</a></div>
+                    <div><strong>Joseph:</strong> <a href="#" style="color: var(--primary);">+XX XXX XXX XXXX</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEIGHBORHOODS & WALKS -->
+        <section id="neighborhoods">
+            <h2><i class="fa-solid fa-person-walking icon-spacer"></i> Neighborhoods & Walks</h2>
+
+            <div class="card">
+                <h3>Brera (artists’ quarter)</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    Cobblestones, galleries, cafés, boutique shopping.<br>
+                    Don’t miss: <strong>Pinacoteca di Brera</strong>, <strong>Brera Botanical Garden</strong>, little streets around <strong>Via Fiori Chiari</strong> / <strong>Via Brera</strong>.<br>
+                    Best time: Late afternoon → evening (aperitivo + dinner).
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Fashion District Stroll</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    Route: <strong>Piazza Duomo / San Babila → Via Montenapoleone → Via della Spiga</strong> (Quadrilatero della Moda).<br>
+                    What to do: Window-shop, people-watch, admire architecture. Easy add-on after Duomo/Galleria.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Via Torino → Colonne → Navigli/Darsena</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    <strong>Via Torino:</strong> lively shopping street starting near Duomo, heading toward Colonne di San Lorenzo.<br>
+                    Continue to <strong>Navigli + Darsena</strong> for canals, aperitivo, dinner, nightlife.<br>
+                    Best time: Sunset → late night (Navigli energy).
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Corso Como → Piazza Gae Aulenti</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    <strong>Corso Como:</strong> pedestrian strip with bars, restaurants, boutiques (10 Corso Como concept store).<br>
+                    Short walk to <strong>Piazza Gae Aulenti</strong> for modern skyline photos and evening vibe.<br>
+                    Nice flow: Aperitivo on Corso Como → Gae Aulenti at golden hour/night.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Chinatown (Via Paolo Sarpi)</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    Core street: <strong>Via Paolo Sarpi</strong> (mostly pedestrian).<br>
+                    What to do: Snacks/street food, bubble tea/desserts, browse shops; then walk toward <strong>Sempione</strong> or <strong>Porta Nuova</strong>.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Corso Buenos Aires → Porta Venezia</h3>
+                <div style="font-size: 0.95rem; color: #444;">
+                    <strong>Corso Buenos Aires:</strong> big high-street shopping artery across budgets.<br>
+                    <strong>Porta Venezia:</strong> Liberty/Art Nouveau vibe, lively at night (bars, inclusive scene).<br>
+                    Good for: Daytime shopping + an evening drink nearby.
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK INFO -->
+        <section id="info">
+            <h2><i class="fa-solid fa-circle-info icon-spacer"></i> Quick Info</h2>
+            
+            <div class="card">
+                <div style="display: flex; align-items: center; margin-bottom: 12px; color: var(--accent);">
+                    <i class="fa-solid fa-phone" style="margin-right: 10px;"></i> 
+                    <strong>Emergency (EU): 112</strong>
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <i class="fa-solid fa-phone" style="margin-right: 10px; color: var(--primary);"></i> 
+                    <strong>Apartment Host:</strong> <a href="#" style="color: var(--primary); text-decoration: none;">+XX XXX XXX XXXX</a>
+                    <div style="font-size: 0.85rem; color: #666; margin-top: 4px; padding-left: 24px;">
+                        Contact for arrival time confirmation, questions, or support
+                    </div>
+                </div>
+                <div style="margin-top: 12px; font-size: 0.9rem; color: #666;">
+                    <strong>Other assistance:</strong><br>
+                    Riccardo: <a href="#" style="color: var(--primary);">+XX XXX XXX XXXX</a><br>
+                    Joseph: <a href="#" style="color: var(--primary);">+XX XXX XXX XXXX</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Italian Basics</h3>
+                <ul class="phrase-list">
+                    <li>
+                        <span class="italian">Buongiorno</span>
+                        <span class="english">Good Morning</span>
+                    </li>
+                    <li>
+                        <span class="italian">Per favore</span>
+                        <span class="english">Please</span>
+                    </li>
+                    <li>
+                        <span class="italian">Grazie</span>
+                        <span class="english">Thank you</span>
+                    </li>
+                    <li>
+                        <span class="italian">Il conto, per favore</span>
+                        <span class="english">The bill, please</span>
+                    </li>
+                     <li>
+                        <span class="italian">Dov'è...?</span>
+                        <span class="english">Where is...?</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-utensils"></i> Food & Nightlife Near Apartment</h3>
+                <div style="font-size: 0.9rem; color: #666;">
+                    <div style="margin-bottom: 8px; padding-left: 8px; border-left: 3px solid var(--primary);">
+                        <strong style="color: var(--primary);">Within 5–10 min walk:</strong>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 6px 0; border-bottom: 1px solid #f0f0f0;">
+                            <i class="fa-solid fa-sandwich" style="color: var(--accent); margin-right: 8px;"></i>
+                            <strong>Panini De Santis</strong> – amazing sandwiches
+                        </li>
+                        <li style="padding: 6px 0; border-bottom: 1px solid #f0f0f0;">
+                            <i class="fa-solid fa-ice-cream" style="color: var(--accent); margin-right: 8px;"></i>
+                            <strong>Cioccolati Italiani</strong>
+                        </li>
+                        <li style="padding: 6px 0; border-bottom: 1px solid #f0f0f0;">
+                            <i class="fa-solid fa-ice-cream" style="color: var(--accent); margin-right: 8px;"></i>
+                            <strong>Gelateria della Musica</strong>
+                        </li>
+                        <li style="padding: 6px 0; border-bottom: 1px solid #f0f0f0;">
+                            <i class="fa-solid fa-wine-glass" style="color: var(--accent); margin-right: 8px;"></i>
+                            <strong>Bar Magenta</strong> – classic Milan aperitivo
+                        </li>
+                        <li style="padding: 6px 0; border-bottom: 1px solid #f0f0f0;">
+                            <i class="fa-solid fa-martini-glass" style="color: var(--accent); margin-right: 8px;"></i>
+                            <strong>Navigli</strong> – big nightlife area
+                        </li>
+                        <li style="padding: 6px 0;">
+                            <i class="fa-solid fa-coffee" style="color: var(--accent); margin-right: 8px;"></i>
+                            <strong>Santa Ambroeus</strong> – famous upscale café
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANSPORT LINKS -->
+        <section id="transport">
+            <h2><i class="fa-solid fa-train-subway icon-spacer"></i> Transport</h2>
+            
+            <a href="https://maps.google.com/?q=Milan" target="_blank" class="btn-link">
+                <i class="fa-brands fa-google"></i> Open Milan in Google Maps
+            </a>
+            <a href="https://maps.google.com/?q=3+Via+Francesco+Novati,+Milan,+Italy" target="_blank" class="btn-link">
+                <i class="fa-solid fa-map-marker-alt"></i> Apartment Location (3 Via Francesco Novati)
+            </a>
+            <a href="https://www.google.com/maps/dir/3+Via+Francesco+Novati,+Milan,+Italy/Milan+Cathedral,+Piazza+del+Duomo,+Milan,+Italy" target="_blank" class="btn-link">
+                <i class="fa-solid fa-diamond-turn-right"></i> Directions: Apartment ➜ Duomo
+            </a>
+            <a href="https://www.google.com/maps/dir/3+Via+Francesco+Novati,+Milan,+Italy/Stadio+Giuseppe+Meazza,+Piazzale+Angelo+Moratti,+Milan,+Italy" target="_blank" class="btn-link">
+                <i class="fa-solid fa-diamond-turn-right"></i> Directions: Apartment ➜ San Siro
+            </a>
+            <a href="https://www.google.com/maps/dir/Milan+Malpensa+Airport+(MXP),+21010+Somma+Lombardo+VA,+Italy/3+Via+Francesco+Novati,+Milan,+Italy" target="_blank" class="btn-link">
+                <i class="fa-solid fa-diamond-turn-right"></i> Directions: MXP Airport ➜ Apartment
+            </a>
+            <a href="https://www.milanomalpensa-airport.com/en/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-plane"></i> MXP Airport Website
+            </a>
+            <a href="https://www.atm.it/en/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-train"></i> ATM (Metro/Tram) Info
+            </a>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+                <h3 style="color: #f8fafc; margin-bottom: 12px;"><i class="fa-solid fa-plane"></i> Airport Transport (MXP)</h3>
+                
+                <!-- FROM AIRPORT TO APARTMENT -->
+                <div class="card" style="margin-bottom: 16px; background: #f0fdf4; border-left: 4px solid #22c55e;">
+                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                        <i class="fa-solid fa-plane-arrival" style="color: var(--primary); margin-right: 8px; font-size: 1.2rem;"></i>
+                        <h3 style="margin: 0; color: var(--primary);">From Malpensa → Apartment</h3>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                        <div style="color: #22c55e; font-weight: 600; margin-bottom: 8px;">
+                            <i class="fa-solid fa-check-circle"></i> BEST OPTION (fastest, easiest, most reliable)
+                        </div>
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 12px;">
+                            <strong style="color: var(--primary);">🚆 Malpensa Express → Cadorna Station</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #666;">
+                            <strong>Step-by-step:</strong><br>
+                            1. After landing, follow signs: <strong>"Malpensa Express → Milano Cadorna"</strong><br>
+                            2. Buy ticket: <strong>€13 per person</strong> (machines or counter)<br>
+                            3. Board train to Milano Cadorna<br>
+                            4. Ride time: <strong>35–37 minutes</strong><br>
+                            5. Arrive at Milano Cadorna<br>
+                            6. Walk <strong>6–7 minutes</strong> to Via Francesco Novati 3
+                        </div>
+                    </div>
+                    <div style="background: #f9fafb; padding: 10px; border-radius: 6px; font-size: 0.85rem; color: #666;">
+                        <strong style="color: var(--primary);">🗺 Walking from Cadorna:</strong><br>
+                        • Exit station on Piazzale Luigi Cadorna<br>
+                        • Walk toward Via Carducci / Corso Magenta<br>
+                        • Turn onto Via Francesco Novati<br>
+                        • Look for number 3
+                    </div>
+                </div>
+
+                <!-- FROM APARTMENT TO AIRPORT -->
+                <div class="card" style="margin-bottom: 16px; background: #eff6ff; border-left: 4px solid #3b82f6;">
+                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                        <i class="fa-solid fa-plane-departure" style="color: var(--primary); margin-right: 8px; font-size: 1.2rem;"></i>
+                        <h3 style="margin: 0; color: var(--primary);">From Apartment → Malpensa</h3>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 12px;">
+                            <strong style="color: var(--primary);">Do exactly the same in reverse:</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #666;">
+                            1. Walk <strong>6–7 minutes</strong> to Milano Cadorna<br>
+                            2. Buy ticket: <strong>€13 per person</strong><br>
+                            3. Take Malpensa Express (Cadorna → MXP Terminal 1 or 2)<br>
+                            4. Travel time: <strong>35–37 minutes</strong><br>
+                            5. Get off at your terminal (check your flight)
+                        </div>
+                    </div>
+                    <div style="background: #fff7ed; padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b; margin-top: 8px;">
+                        <div style="font-weight: 600; color: #92400e; margin-bottom: 6px;">
+                            <i class="fa-solid fa-clock"></i> Recommended Timing:
+                        </div>
+                        <div style="font-size: 0.85rem; color: #666;">
+                            For international flights (like Tel Aviv):<br>
+                            <strong>Leave apartment 2.5–3 hours before departure</strong><br><br>
+                            <strong>Why:</strong><br>
+                            • 7 min walk<br>
+                            • 35 min train<br>
+                            • 10 min inside airport<br>
+                            • Security + passport control can be long during holidays
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #f0fdf4; padding: 12px; border-radius: 8px; border-left: 3px solid #22c55e; margin-top: 12px;">
+                    <div style="font-size: 0.9rem; color: #166534; margin-bottom: 6px;">
+                        <i class="fa-solid fa-star"></i> <strong>Why This is Perfect for Your Location:</strong>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #666;">
+                        Cadorna is the best station in Milan for Malpensa. Most tourists have to take metro + train, but you only walk 6 minutes and get on the train directly to the airport. <strong>This is the easiest, cleanest, fastest airport connection you can get.</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+                <h3 style="color: #f8fafc; margin-bottom: 12px;">Day Trips from Apartment</h3>
+                <div style="background: #f9fafb; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem; color: #666;">
+                    <strong style="color: var(--primary);">You're in the ideal location:</strong><br>
+                    • <strong>Lake Como:</strong> Direct train from Cadorna → 1 hour<br>
+                    • <strong>Bergamo:</strong> From Centrale → 45–50 min<br>
+                    • <strong>Lugano/Switzerland:</strong> From Centrale → 1h15<br>
+                    <span style="color: var(--accent); font-weight: 600; display: block; margin-top: 6px;">✓ You won't need taxis at all</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+                <h3 style="color: #f8fafc; margin-bottom: 12px;">Lake Como Day Trip (27/12)</h3>
+            </div>
+            
+            <a href="https://www.trenord.it/en/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-train"></i> Trenord (Milan → Como Trains)
+            </a>
+            <a href="https://www.trenitalia.com/en.html" target="_blank" class="btn-link">
+                <i class="fa-solid fa-train"></i> Trenitalia (Train Tickets)
+            </a>
+            <a href="https://www.trainline.com/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-train"></i> Trainline (Train Booking)
+            </a>
+            <a href="https://www.funicolarecomo.it/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-mountain"></i> Funicolare Como-Brunate Info
+            </a>
+            <a href="https://www.navigazionelaghi.it/en/" target="_blank" class="btn-link">
+                <i class="fa-solid fa-ship"></i> Navigazione Laghi (Lake Ferries)
+            </a>
+            <a href="https://maps.google.com/?q=Como,+Italy" target="_blank" class="btn-link">
+                <i class="fa-brands fa-google"></i> Como in Google Maps
+            </a>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+                <h3 style="color: #f8fafc; margin-bottom: 12px;">Optional Transport Service</h3>
+                <div style="background: #f0fdf4; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem; color: #666; border-left: 3px solid #22c55e;">
+                    <div style="margin-bottom: 8px;">
+                        <strong style="color: var(--primary);">Property offers (subject to availability):</strong>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        • Cars (up to 3 seats)<br>
+                        • Vans with 6 or 8 seats
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <strong>Services include transfers to/from:</strong><br>
+                        • Airports • Train stations • Outlets<br>
+                        • Nearby cities: Como, Bellagio, Florence, Venice, Lugano, and more
+                    </div>
+                    <div style="color: var(--accent); font-weight: 600; margin-top: 8px;">
+                        <i class="fa-solid fa-phone"></i> Must be booked in advance<br>
+                        Contact host: <a href="#" style="color: var(--primary);">+XX XXX XXX XXXX</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKLIST -->
+        <section id="checklist">
+            <h2><i class="fa-solid fa-clipboard-check icon-spacer"></i> Packing</h2>
+            
+            <div class="card">
+                <h3>Essentials</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Passport & ID</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Wallet (Cards & Euro Cash)</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Phone & Chargers</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Type C / L Power Adapter</span></div>
+            </div>
+
+            <div class="card">
+                <h3>Clothing (Winter)</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Winter Jacket / Coat</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Sweaters / Layers</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Jeans / Trousers</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Comfortable Walking Shoes</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Sleepwear</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Hat, Scarf, Gloves</span></div>
+            </div>
+
+            <div class="card">
+                <h3>Match Day</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Match Tickets (Phone/Print)</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Power Bank (Full charge)</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Red/Black scarf (Optional)</span></div>
+            </div>
+            
+            <div class="card">
+                <h3>Toiletries</h3>
+                <div class="checklist-item"><input type="checkbox"><span>Toothbrush / Paste</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Deodorant</span></div>
+                <div class="checklist-item"><input type="checkbox"><span>Meds / Painkillers</span></div>
+            </div>
+        </section>
+
+        <!-- NOTES -->
+        <section id="notes">
+            <h2><i class="fa-solid fa-pen icon-spacer"></i> Notes</h2>
+            <textarea class="notes-area" placeholder="Type quick notes here (restaurants, places to remember, etc)..."></textarea>
+            <p style="font-size: 0.8rem; color: #999; margin-top: 8px;">* Notes are temporary and clear on refresh.</p>
+        </section>
+
+    </div> <!-- End Container -->
+
+    <!-- STICKY NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="#map" class="nav-item">
+            <i class="fa-solid fa-map"></i>
+            <span>Map</span>
+        </a>
+        <a href="#schedule" class="nav-item">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Plan</span>
+        </a>
+        <a href="#flights" class="nav-item">
+            <i class="fa-solid fa-plane"></i>
+            <span>Flights</span>
+        </a>
+        <a href="#tickets" class="nav-item">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Tix</span>
+        </a>
+        <a href="#checkin" class="nav-item">
+            <i class="fa-solid fa-door-open"></i>
+            <span>Check-in</span>
+        </a>
+        <a href="#neighborhoods" class="nav-item">
+            <i class="fa-solid fa-person-walking"></i>
+            <span>Areas</span>
+        </a>
+        <a href="#info" class="nav-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Info</span>
+        </a>
+        <a href="#transport" class="nav-item">
+            <i class="fa-solid fa-train"></i>
+            <span>Travel</span>
+        </a>
+        <a href="#checklist" class="nav-item">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Pack</span>
+        </a>
+        <a href="#notes" class="nav-item">
+            <i class="fa-solid fa-pen"></i>
+            <span>Notes</span>
+        </a>
+    </nav>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Interactive Checkboxes
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('.checklist-item');
+                if(this.checked) {
+                    parent.classList.add('checked');
+                } else {
+                    parent.classList.remove('checked');
+                }
+            });
+        });
+
+        // 2. Active State for Navigation on Scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Offset for header height approx
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                    // Optional: scroll nav to keep active item in view if nav overflows
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html> 
